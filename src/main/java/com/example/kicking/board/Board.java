@@ -1,10 +1,11 @@
 package com.example.kicking.board;
 
 import com.example.kicking.member.Member;
+import com.example.kicking.utils.BaseTimeEntity;
 import jakarta.persistence.*;
 
 @Entity
-public class Board {
+public class Board extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
