@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface BattleBoardRepository extends JpaRepository<BattleBoard, Long> {
 
-    @Query(value = "SELECT * FROM BattleBoard c LEFT JOIN (SELECT * FROM Board WHERE createdDate >= :startAt) b ON c.challengeBoard = b.id ORDER BY RAND() LIMIT 1)", nativeQuery = true)
+    @Query(value = "SELECT id, created_at, updated_at, best_board, challenge_board FROM battle_board c JOIN (SELECT id as cid FROM board WHERE created_at >= :startAt) b ON c.challenge_board = b.cid ORDER BY RAND() LIMIT 1", nativeQuery = true)
     List<BattleBoard> findRandomBattle(@Param("startAt") LocalDateTime startAt);
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    String findNickNameById(Long id);
-    String findProfileImageById(Long id);
+    Member findNickNameById(Long id);
+    Member findProfileImageById(Long id);
 }

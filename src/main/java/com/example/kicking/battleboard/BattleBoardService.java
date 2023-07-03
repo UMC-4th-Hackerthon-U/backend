@@ -43,8 +43,8 @@ public class BattleBoardService {
             if (challengeContent.length() > 40)
                 challengeContent = challengeContent.substring(0, 40);
 
-            String bestNickName = memberRepository.findNickNameById(bestBoard.getMember().getId());
-            String challengeNickName = memberRepository.findNickNameById(bestBoard.getMember().getId());
+            String bestNickName = memberRepository.findNickNameById(bestBoard.getMember().getId()).getNickName();
+            String challengeNickName = memberRepository.findNickNameById(bestBoard.getMember().getId()).getNickName();
             if (bestNickName.length() > 10)
                 bestNickName = bestNickName.substring(0, 10);
             if (challengeNickName.length() > 10)
@@ -54,13 +54,13 @@ public class BattleBoardService {
                     .boardContent(bestContent)
                     .boardId(bestBoard.getId())
                     .memberNickName(bestNickName)
-                    .memberProfileImage(memberRepository.findProfileImageById(bestBoard.getMember().getId()))
+                    .memberProfileImage(memberRepository.findProfileImageById(bestBoard.getMember().getId()).getProfileImage())
                     .build();
             RandomBattleInfoDto challengeBoardInfo = RandomBattleInfoDto.builder()
                     .boardContent(challengeContent)
                     .boardId(challengeBoard.getId())
                     .memberNickName(challengeNickName)
-                    .memberProfileImage(memberRepository.findProfileImageById(bestBoard.getMember().getId()))
+                    .memberProfileImage(memberRepository.findProfileImageById(bestBoard.getMember().getId()).getProfileImage())
                     .build();
 
             return ViewRandomBattleResDto.builder()
@@ -83,7 +83,7 @@ public class BattleBoardService {
                 if (boardContent.length() > 40)
                     boardContent = boardContent.substring(0, 40);
 
-                String boardNickName = memberRepository.findNickNameById(board.getMember().getId());
+                String boardNickName = memberRepository.findNickNameById(board.getMember().getId()).getNickName();
                 if (boardNickName.length() > 10)
                     boardNickName = boardNickName.substring(0, 10);
 
@@ -91,7 +91,7 @@ public class BattleBoardService {
                         .boardContent(boardContent)
                         .boardId(board.getId())
                         .memberNickName(boardNickName)
-                        .memberProfileImage(memberRepository.findProfileImageById(board.getMember().getId()))
+                        .memberProfileImage(memberRepository.findProfileImageById(board.getMember().getId()).getProfileImage())
                         .boardDayLike(board.getDayLike())
                         .build();
                 viewMostThreeBoardResDtos.add(viewMostThreeBoardResDto);

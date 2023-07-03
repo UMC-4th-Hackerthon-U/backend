@@ -32,7 +32,7 @@ public class BattleBoardController {
      * */
     // @Tag(name = "진행중인 배틀 하나를 랜덤 조회 API")
     // @Operation(summary = "진행중인 배틀 하나를 랜덤 조회", description = "진행중인 배틀 하나를 랜덤 조회하기 위한 API")
-    @GetMapping("/resume/random")
+    @GetMapping("/random")
     public BaseResponse<ViewRandomBattleResDto> viewRandomBattle(){
         try{
             return new BaseResponse<>(battleBoardService.viewRandomBattle());

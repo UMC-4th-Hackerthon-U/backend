@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
-    @Query(value = "SELECT * FROM Board ORDER BY dayLike DESC LIMIT 3)", nativeQuery = true)
+    @Query(value = "SELECT * FROM board ORDER BY day_like DESC LIMIT 3", nativeQuery = true)
     List<Board> findBoardByLikes();
 
-    @Query(value = "SELECT * FROM Board ORDER BY scrapNumber DESC LIMIT 3)", nativeQuery = true)
+    @Query(value = "SELECT * FROM board ORDER BY scrap_number DESC LIMIT 3", nativeQuery = true)
     List<Board> findBoardByScraps();
 
-    @Query(value = "SELECT * FROM Board ORDER BY commentNumber DESC LIMIT 3)", nativeQuery = true)
+    @Query(value = "SELECT * FROM board ORDER BY comment_number DESC LIMIT 3", nativeQuery = true)
     List<Board> findBoardByShares();
 }
