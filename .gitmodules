@@ -1,0 +1,3 @@
+[submodule "config"]
+	path = config
+	url = https://github.com/UMC-4th-Hackerthon-U/application.git
