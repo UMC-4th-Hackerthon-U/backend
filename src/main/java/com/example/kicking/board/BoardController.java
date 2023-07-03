@@ -56,7 +56,6 @@ public class BoardController {
         return new BaseResponse<>(boardService.insertBoardWithShare(multipartFiles, boardGetReqDto, sharedIdx));
     }
 
-        /**
      * 흑역사 상세 조회
      * @param id
      * @return
