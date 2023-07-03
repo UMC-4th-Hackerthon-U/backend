@@ -56,10 +56,6 @@ public class BoardController {
         return new BaseResponse<>(boardService.insertBoardWithShare(multipartFiles, boardGetReqDto, sharedIdx));
     }
 
-     * 흑역사 상세 조회
-     * @param id
-     * @return
-     */
     @GetMapping("/board/{id}")
     public BaseResponse<BoardGetDto> selectBoard(@PathVariable Long id){
         return new BaseResponse<>(boardService.selectBoard(id));
