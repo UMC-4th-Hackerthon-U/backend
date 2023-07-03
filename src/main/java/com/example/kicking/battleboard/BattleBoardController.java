@@ -47,9 +47,37 @@ public class BattleBoardController {
     // @Tag(name = "흑역사 좋아요 상위 3개 조회 API")
     // @Operation(summary = "흑역사 좋아요 상위 3개 조회", description = "흑역사 좋아요 상위 3개 조회하기 위한 API")
     @GetMapping("/likes")
-    public BaseResponse<List<ViewMostLikesResDto>> viewMostLikes(){
+    public BaseResponse<List<ViewMostThreeBoardResDto>> viewMostLikes(){
         try{
             return new BaseResponse<>(battleBoardService.viewMostLikes());
+        }catch (BaseException exception) {
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    /**
+     * 흑역사 스크랩 상위 3개 조회
+     * */
+    // @Tag(name = "흑역사 스크랩 상위 3개 조회 API")
+    // @Operation(summary = "흑역사 스크랩 상위 3개 조회", description = "흑역사 스크랩 상위 3개 조회하기 위한 API")
+    @GetMapping("/scraps")
+    public BaseResponse<List<ViewMostThreeBoardResDto>> viewMostScraps(){
+        try{
+            return new BaseResponse<>(battleBoardService.viewMostScraps());
+        }catch (BaseException exception) {
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    /**
+     * 흑역사 공유 상위 3개 조회
+     * */
+    // @Tag(name = "흑역사 공유 상위 3개 조회 API")
+    // @Operation(summary = "흑역사 공유 상위 3개 조회", description = "흑역사 공유 상위 3개 조회하기 위한 API")
+    @GetMapping("/shares")
+    public BaseResponse<List<ViewMostThreeBoardResDto>> viewMostShares(){
+        try{
+            return new BaseResponse<>(battleBoardService.viewMostShares());
         }catch (BaseException exception) {
             return new BaseResponse<>(exception.getStatus());
         }

@@ -1,7 +1,7 @@
 package com.example.kicking.battleboard;
 
 import com.example.kicking.battleboard.dto.RandomBattleInfoDto;
-import com.example.kicking.battleboard.dto.ViewMostLikesResDto;
+import com.example.kicking.battleboard.dto.ViewMostThreeBoardResDto;
 import com.example.kicking.battleboard.dto.ViewRandomBattleResDto;
 import com.example.kicking.board.Board;
 import com.example.kicking.board.BoardRepository;
@@ -74,12 +74,11 @@ public class BattleBoardService {
         }
     }
 
-    public List<ViewMostLikesResDto> viewMostLikes() throws BaseException {
+    public List<ViewMostThreeBoardResDto> viewMostThreeBoard(List<Board> mostThreeBoard) throws BaseException {
         try{
-            List<ViewMostLikesResDto> viewRandomBattleResDtos = new ArrayList<>();
-            List<Board> mostLikeBoards = boardRepository.findBoardByLikes();
+            List<ViewMostThreeBoardResDto> viewMostThreeBoardResDtos = new ArrayList<>();
 
-            for (Board board : mostLikeBoards) {
+            for (Board board : mostThreeBoard) {
                 String boardContent = board.getContent();
                 if (boardContent.length() > 40)
                     boardContent = boardContent.substring(0, 40);
@@ -88,16 +87,49 @@ public class BattleBoardService {
                 if (boardNickName.length() > 10)
                     boardNickName = boardNickName.substring(0, 10);
 
-                ViewMostLikesResDto viewMostLikesResDto = ViewMostLikesResDto.builder()
+                ViewMostThreeBoardResDto viewMostThreeBoardResDto = ViewMostThreeBoardResDto.builder()
                         .boardContent(boardContent)
                         .boardId(board.getId())
                         .memberNickName(boardNickName)
                         .memberProfileImage(memberRepository.findProfileImageById(board.getMember().getId()))
                         .boardDayLike(board.getDayLike())
                         .build();
-                viewRandomBattleResDtos.add(viewMostLikesResDto);
+                viewMostThreeBoardResDtos.add(viewMostThreeBoardResDto);
             }
-            return viewRandomBattleResDtos;
+            return viewMostThreeBoardResDtos;
+
+        }catch (Exception exception){
+            log.error(exception.getMessage());
+            throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
+        }
+    }
+
+    public List<ViewMostThreeBoardResDto> viewMostLikes() throws BaseException {
+        try{
+            List<Board> mostLikeBoards = boardRepository.findBoardByLikes();
+            return viewMostThreeBoard(mostLikeBoards);
+
+        }catch (Exception exception){
+            log.error(exception.getMessage());
+            throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
+        }
+    }
+
+    public List<ViewMostThreeBoardResDto> viewMostScraps() throws BaseException {
+        try{
+            List<Board> mostLikeBoards = boardRepository.findBoardByScraps();
+            return viewMostThreeBoard(mostLikeBoards);
+
+        }catch (Exception exception){
+            log.error(exception.getMessage());
+            throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
+        }
+    }
+
+    public List<ViewMostThreeBoardResDto> viewMostShares() throws BaseException {
+        try{
+            List<Board> mostLikeBoards = boardRepository.findBoardByShares();
+            return viewMostThreeBoard(mostLikeBoards);
 
         }catch (Exception exception){
             log.error(exception.getMessage());

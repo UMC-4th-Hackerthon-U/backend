@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ViewMostLikesResDto {
+public class ViewMostThreeBoardResDto {
 
     // @Schema(name = "memberProfileImage", example = "1", required = true, description = "캡슐 인덱스")
     private String memberProfileImage;
@@ -22,7 +22,7 @@ public class ViewMostLikesResDto {
     private Integer boardDayLike;
 
     @Builder
-    public ViewMostLikesResDto(String memberProfileImage, String memberNickName, Long boardId, String boardContent, Integer boardDayLike) {
+    public ViewMostThreeBoardResDto(String memberProfileImage, String memberNickName, Long boardId, String boardContent, Integer boardDayLike) {
         this.memberProfileImage = memberProfileImage;
         this.memberNickName = memberNickName;
         this.boardId = boardId;
