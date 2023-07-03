@@ -54,7 +54,9 @@ public class BoardController {
                                                       @RequestPart(value = "boardGetReqDto") BoardGetReqDto boardGetReqDto,
                                                       @PathVariable("sharedIdx") Long sharedIdx){
         return new BaseResponse<>(boardService.insertBoardWithShare(multipartFiles, boardGetReqDto, sharedIdx));
-    /**
+    }
+
+        /**
      * 흑역사 상세 조회
      * @param id
      * @return
