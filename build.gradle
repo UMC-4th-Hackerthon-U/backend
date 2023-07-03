@@ -41,3 +41,7 @@ task copyGitSubmodule(type: Copy) {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+jar {
+    enabled = false
+}
