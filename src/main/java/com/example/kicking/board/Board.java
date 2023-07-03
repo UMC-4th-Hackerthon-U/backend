@@ -5,12 +5,10 @@ import com.example.kicking.member.Member;
 import com.example.kicking.utils.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
 @Getter
 @Entity
 public class Board extends BaseTimeEntity {
@@ -19,10 +17,10 @@ public class Board extends BaseTimeEntity {
     private Long id;
 
     private String content;
-    private Integer accLike = 0;
-    private Integer dayLike = 0;
-    private Integer commentNumber = 0;
-    private Integer scrapNumber = 0;
+    private Integer accLike;
+    private Integer dayLike;
+    private Integer commentNumber;
+    private Integer scrapNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
