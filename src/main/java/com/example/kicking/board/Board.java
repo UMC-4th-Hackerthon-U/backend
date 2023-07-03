@@ -5,6 +5,7 @@ import com.example.kicking.utils.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+@Getter
 @Entity
 @Getter
 public class Board extends BaseTimeEntity {
