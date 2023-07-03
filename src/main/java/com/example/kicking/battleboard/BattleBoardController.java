@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -34,6 +36,20 @@ public class BattleBoardController {
     public BaseResponse<ViewRandomBattleResDto> viewRandomBattle(){
         try{
             return new BaseResponse<>(battleBoardService.viewRandomBattle());
+        }catch (BaseException exception) {
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    /**
+     * 흑역사 좋아요 상위 3개 조회
+     * */
+    // @Tag(name = "흑역사 좋아요 상위 3개 조회 API")
+    // @Operation(summary = "흑역사 좋아요 상위 3개 조회", description = "흑역사 좋아요 상위 3개 조회하기 위한 API")
+    @GetMapping("/likes")
+    public BaseResponse<List<ViewMostLikesResDto>> viewMostLikes(){
+        try{
+            return new BaseResponse<>(battleBoardService.viewMostLikes());
         }catch (BaseException exception) {
             return new BaseResponse<>(exception.getStatus());
         }

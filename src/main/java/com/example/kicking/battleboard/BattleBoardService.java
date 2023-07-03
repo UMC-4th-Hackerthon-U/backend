@@ -1,8 +1,10 @@
 package com.example.kicking.battleboard;
 
 import com.example.kicking.battleboard.dto.RandomBattleInfoDto;
+import com.example.kicking.battleboard.dto.ViewMostLikesResDto;
 import com.example.kicking.battleboard.dto.ViewRandomBattleResDto;
 import com.example.kicking.board.Board;
+import com.example.kicking.board.BoardRepository;
 import com.example.kicking.member.MemberRepository;
 import com.example.kicking.utils.BaseException;
 import com.example.kicking.utils.BaseResponseStatus;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -19,6 +22,7 @@ import java.util.List;
 @Service
 @Transactional
 public class BattleBoardService {
+    private final BoardRepository boardRepository;
 
     private final BattleBoardRepository battleBoardRepository;
     private final MemberRepository memberRepository;
@@ -63,6 +67,37 @@ public class BattleBoardService {
                     .bestBoardInfo(bestBoardInfo)
                     .challengeBoardInfo(challengeBoardInfo)
                     .build();
+
+        }catch (Exception exception){
+            log.error(exception.getMessage());
+            throw new BaseException(BaseResponseStatus.DATABASE_ERROR);
+        }
+    }
+
+    public List<ViewMostLikesResDto> viewMostLikes() throws BaseException {
+        try{
+            List<ViewMostLikesResDto> viewRandomBattleResDtos = new ArrayList<>();
+            List<Board> mostLikeBoards = boardRepository.findBoardByLikes();
+
+            for (Board board : mostLikeBoards) {
+                String boardContent = board.getContent();
+                if (boardContent.length() > 40)
+                    boardContent = boardContent.substring(0, 40);
+
+                String boardNickName = memberRepository.findNickNameById(board.getMember().getId());
+                if (boardNickName.length() > 10)
+                    boardNickName = boardNickName.substring(0, 10);
+
+                ViewMostLikesResDto viewMostLikesResDto = ViewMostLikesResDto.builder()
+                        .boardContent(boardContent)
+                        .boardId(board.getId())
+                        .memberNickName(boardNickName)
+                        .memberProfileImage(memberRepository.findProfileImageById(board.getMember().getId()))
+                        .boardDayLike(board.getDayLike())
+                        .build();
+                viewRandomBattleResDtos.add(viewMostLikesResDto);
+            }
+            return viewRandomBattleResDtos;
 
         }catch (Exception exception){
             log.error(exception.getMessage());
