@@ -2,6 +2,7 @@ package com.example.kicking.share;
 
 import com.example.kicking.board.Board;
 import jakarta.persistence.*;
+import lombok.Builder;
 
 @Entity
 public class Share {
@@ -14,4 +15,14 @@ public class Share {
 
     @ManyToOne
     private Board sharedBoard;
+
+    public Share() {
+    }
+
+    @Builder
+    public Share(Board sharedBoard, Board newBoard) {
+        this.sharedBoard = sharedBoard;
+        this.newBoard = newBoard;
+    }
+
 }
