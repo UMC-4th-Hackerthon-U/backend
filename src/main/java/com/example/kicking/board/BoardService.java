@@ -1,6 +1,7 @@
 package com.example.kicking.board;
 
 
+import com.example.kicking.board.dto.BoardGetDto;
 import com.example.kicking.board.dto.BoardGetReqDto;
 import com.example.kicking.board.dto.BoardGetResDto;
 import com.example.kicking.boardImage.BoardImage;
@@ -39,10 +40,15 @@ public class BoardService {
         return "흑역사 추가 완료";
     }
 
-    public Page<BoardGetResDto> selectBoard(int page){
+    public Page<BoardGetResDto> selectAllBoard(int page){
         PageRequest pageRequest = PageRequest.of(page, 3, Sort.by(Sort.Direction.DESC, "createdDate"));
         Page<Board> results = boardRepository.findAll(pageRequest);
         return results.map(BoardGetResDto::new);
+    }
+
+    public BoardGetDto selectBoard(Long boardId){
+        Board board = boardRepository.findById(boardId).orElseThrow();
+        return new BoardGetDto(board);
     }
 
 }
