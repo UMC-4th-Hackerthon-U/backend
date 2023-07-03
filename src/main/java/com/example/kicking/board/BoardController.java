@@ -29,4 +29,17 @@ public class BoardController {
         return new BaseResponse<>(boardService.selectBoard(page));
     }
 
+    @PostMapping("/board/battle/{bestIdx}")
+    public BaseResponse<String> insertBoardWithBattle(@RequestPart(value = "image", required = false) List<MultipartFile> multipartFiles,
+                                            @RequestPart(value = "boardGetReqDto") BoardGetReqDto boardGetReqDto,
+                                            @PathVariable("bestIdx") Long bestIdx){
+        return new BaseResponse<>(boardService.insertBoardWithBattle(multipartFiles, boardGetReqDto, bestIdx));
+    }
+
+    @PostMapping("/board/share/{sharedIdx}")
+    public BaseResponse<String> insertBoardWithShare(@RequestPart(value = "image", required = false) List<MultipartFile> multipartFiles,
+                                                      @RequestPart(value = "boardGetReqDto") BoardGetReqDto boardGetReqDto,
+                                                      @PathVariable("sharedIdx") Long sharedIdx){
+        return new BaseResponse<>(boardService.insertBoardWithShare(multipartFiles, boardGetReqDto, sharedIdx));
+    }
 }
