@@ -5,8 +5,8 @@ import com.example.kicking.utils.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-@Entity
 @Getter
+@Entity
 public class Board extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +19,5 @@ public class Board extends BaseTimeEntity {
     private Integer scrapNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "memberId")
     private Member member;
 }
